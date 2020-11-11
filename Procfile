@@ -1,1 +1,1 @@
-web: node ./herindex.js
+web: node ./index.js
