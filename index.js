@@ -13,6 +13,7 @@ mongoose.connect('mongodb://admin:admin1@ds013951.mlab.com:13951/todos',
         console.log('Connected to MongoDb!');
     });
 
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.get('/:username/todos', (req, res) => {
