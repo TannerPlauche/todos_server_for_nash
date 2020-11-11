@@ -26,6 +26,18 @@ app.get('/:username/todos', (req, res) => {
     });
 })
 
+
+app.get('/:username/todos/:id', (req, res) => {
+    Todo.findOne({ _id: mongoose.Types.ObjectId(req.params.id) }, (err, todos) => {
+        if (err) {
+            console.log('err: ', err);
+            res.send({ error: `There was an error fetching your todos: ${err}` });
+        } else {
+            res.send(todos);
+        }
+    });
+})
+
 app.post('/:username/todos', (req, res) => {
     let username = req.params.username;
     let todo = {
