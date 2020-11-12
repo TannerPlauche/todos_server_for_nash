@@ -81,6 +81,15 @@ app.delete('/:username/todos/:id', (req, res) => {
 });
 
 
+app.delete('/:username/todos', (req, res) => {
+    let username = req.params.username;
+
+    Todo.deleteOne({ user: username }).then((value) => {
+        res.send(`${id} deleted`);
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 })
