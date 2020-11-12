@@ -85,7 +85,7 @@ app.delete('/:username/todos', (req, res) => {
     let username = req.params.username;
 
     Todo.deleteOne({ user: username }).then((value) => {
-        res.send(`${id} deleted`);
+        res.send(`${username}'s items deleted`);
     });
 });
 
