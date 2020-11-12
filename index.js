@@ -48,12 +48,12 @@ app.post('/:username/todos', (req, res) => {
         ...req.body,
         user: username
     }
-    // let newTodo = new Todo(todo);
-    // newTodo.save().then((savedTodo) => {
-    res.send(req.body);
-    // }).catch(err => {
-    // res.send({ error: `There was an error fetching your todos: ${err}` });
-    // })
+    let newTodo = new Todo(todo);
+    newTodo.save().then((savedTodo) => {
+        res.send(req.body);
+    }).catch(err => {
+        res.send({ error: `There was an error fetching your todos: ${err}` });
+    })
 });
 
 app.put('/:username/todos/:id', (req, res) => {
