@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Todo = require('./todo-model');
 const app = express();
 const PORT = process.env.PORT || 5000;
+const cors = require('cors');
 
 mongoose.connect('mongodb://admin:admin1@ds013951.mlab.com:13951/todos',
     {
@@ -13,7 +14,8 @@ mongoose.connect('mongodb://admin:admin1@ds013951.mlab.com:13951/todos',
         console.log('Connected to MongoDb!');
     });
 
-app.use(bodyParser.urlencoded());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/:username/todos', (req, res) => {
@@ -41,16 +43,17 @@ app.get('/:username/todos/:id', (req, res) => {
 
 app.post('/:username/todos', (req, res) => {
     let username = req.params.username;
+    console.log(req.body);
     let todo = {
         ...req.body,
         user: username
     }
-    let newTodo = new Todo(todo);
-    newTodo.save().then((savedTodo) => {
-        res.send(savedTodo);
-    }).catch(err => {
-        res.send({ error: `There was an error fetching your todos: ${err}` });
-    })
+    // let newTodo = new Todo(todo);
+    // newTodo.save().then((savedTodo) => {
+    res.send(req.body);
+    // }).catch(err => {
+    // res.send({ error: `There was an error fetching your todos: ${err}` });
+    // })
 });
 
 app.put('/:username/todos/:id', (req, res) => {
