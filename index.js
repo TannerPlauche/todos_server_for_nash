@@ -80,11 +80,10 @@ app.delete('/:username/todos/:id', (req, res) => {
     });
 });
 
-
 app.delete('/:username/todos', (req, res) => {
     let username = req.params.username;
 
-    Todo.delete({ user: username }).then((value) => {
+    Todo.delete({ user: username }, (err, value) => {
         res.send(`${username}'s items deleted`);
     });
 });
