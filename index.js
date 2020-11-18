@@ -29,7 +29,6 @@ app.get('/:username/todos', (req, res) => {
     });
 })
 
-
 app.get('/:username/todos/:id', (req, res) => {
     Todo.findOne({ _id: mongoose.Types.ObjectId(req.params.id) }, (err, todos) => {
         if (err) {
@@ -50,7 +49,7 @@ app.post('/:username/todos', (req, res) => {
     }
     let newTodo = new Todo(todo);
     newTodo.save().then((savedTodo) => {
-        res.send(req.body);
+        res.send(savedTodo);
     }).catch(err => {
         res.send({ error: `There was an error fetching your todos: ${err}` });
     })
@@ -73,7 +72,6 @@ app.put('/:username/todos/:id', (req, res) => {
 
 app.delete('/:username/todos/:id', (req, res) => {
     let id = req.params.id;
-    let username = req.params.username;
 
     Todo.deleteOne({ _id: mongoose.Types.ObjectId(id) }).then((value) => {
         res.send(`${id} deleted`);
